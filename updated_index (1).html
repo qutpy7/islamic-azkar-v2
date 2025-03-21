@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع الأذكار الإسلامية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0e6e3a;
+            --secondary-color: #d4af37;
+            --light-bg: #ffffff;
+            --dark-bg: #121212;
+            --light-text: #333333;
+            --dark-text: #f5f5f5;
+            --card-bg: #f9f9f9;
+            --card-border: #e0e0e0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        .arabic {
+            font-family: 'Amiri', serif;
+            line-height: 1.8;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            margin-left: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .hero {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .dark-mode .section-title {
+            color: var(--secondary-color);
+        }
+        
+        .azkar-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .dark-mode .azkar-card {
+            background-color: #1e1e1e;
+            border-color: #333;
+        }
+        
+        .azkar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .azkar-text {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            text-align: right;
+            font-family: 'Amiri', serif;
+        }
+        
+        .azkar-count {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .azkar-virtue {
+            background-color: rgba(212, 175, 55, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        
+        .dark-mode .azkar-virtue {
+            background-color: rgba(212, 175, 55, 0.2);
+        }
+        
+        .button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #0a5c2f;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .dark-mode .category-card {
+            background-color: #1e1e1e;
+            border-color: #333;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .category-icon {
+            color: var(--secondary-color);
+        }
+        
+        .category-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .category-title {
+            color: var(--secondary-color);
+        }
+        
+        .category-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .dark-mode .category-description {
+            color: #aaa;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .azkar-arabic {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* بيانات التواصل */
+        .contact-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .dark-mode .contact-section {
+            background-color: #1e1e1e;
+            border-color: #333;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .dark-mode .contact-icon {
+            color: var(--secondary-color);
+        }
+
+        .contact-text {
+            font-size: 1.2rem;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>موقع الأذكار الإسلامية</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#morning">أذكار الصباح</a></li>
+                <li><a href="#evening">أذكار المساء</a></li>
+                <li><a href="#daily">أذكار يومية</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle">🌙</button>
+    </header>
+    
+    <div class="hero">
+        <h1>أذكار المسلم</h1>
+        <p>مجموعة من الأذكار والأدعية المأثورة عن النبي محمد صلى الله عليه وسلم</p>
+    </div>
+    
+    <div class="container">
+        <section id="home">
+            <h2 class="section-title">الأقسام الرئيسية</h2>
+            
+            <div class="categories">
+                <div class="category-card">
+                    <div class="category-icon">☀️</div>
+                    <div class="category-title">أذكار الصباح</div>
+                    <div class="category-description">الأذكار التي يقولها المسلم في الصباح بعد صلاة الفجر إلى طلوع الشمس</div>
+                    <a href="#morning" class="button" style="display: inline-block; margin-top: 1rem;">عرض الأذكار</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🌙</div>
+                    <div class="category-title">أذكار المساء</div>
+                    <div class="category-description">الأذكار التي يقولها المسلم في المساء بعد صلاة العصر إلى غروب الشمس</div>
+                    <a href="#evening" class="button" style="display: inline-block; margin-top: 1rem;">عرض الأذكار</a>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📿</div>
+                    <div class="category-title">أذكار يومية</div>
+                    <div class="category-description">أذكار متنوعة يقولها المسلم في مختلف المناسبات والأوقات خلال اليوم</div>
+                    <a href="#daily" class="button" style="display: inline-block; margin-top: 1rem;">عرض الأذكار</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="morning">
+            <h2 class="section-title">أذكار الصباح</h2>
+            
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ</p>
+                    <p>اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ. [آية الكرسى - البقرة 255].</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح أجير من الجن حتى يمسى ومن قالها حين يمسى أجير من الجن حتى يصبح.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم</p>
+                    <p>قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم</p>
+                    <p>قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم</p>
+                    <p>قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَصْـبَحْنا وَأَصْـبَحَ المُـلْكُ لله وَالحَمدُ لله ، لا إلهَ إلاّ اللّهُ وَحدَهُ لا شَريكَ لهُ، لهُ المُـلكُ ولهُ الحَمْـد، وهُوَ على كلّ شَيءٍ قدير ، رَبِّ أسْـأَلُـكَ خَـيرَ ما في هـذا اليوم وَخَـيرَ ما بَعْـدَه ، وَأَعـوذُ بِكَ مِنْ شَـرِّ ما في هـذا اليوم وَشَرِّ ما بَعْـدَه، رَبِّ أَعـوذُبِكَ مِنَ الْكَسَـلِ وَسـوءِ الْكِـبَر ، رَبِّ أَعـوذُ بِكَ مِنْ عَـذابٍ في النّـارِ وَعَـذابٍ في القَـبْر.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ ، خَلَقْتَنـي وَأَنا عَبْـدُك ، وَأَنا عَلـى عَهْـدِكَ وَوَعْـدِكَ ما اسْتَـطَعْـت ، أَعـوذُبِكَ مِنْ شَـرِّ ما صَنَـعْت ، أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها موقنا بها حين يمسى ومات من ليلته دخل الجنة وكذلك حين يصبح.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كان حقا على الله أن يرضيه يوم القيامة.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>4</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها أعتقه الله من النار.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ ما أَصْبَـَحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح أدى شكر يومه.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>7</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها كفاه الله ما أهمه من أمر الدنيا والأخرة.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>لم يضره من الله شيء.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ بِكَ أَصْـبَحْنا وَبِكَ أَمْسَـينا ، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ النُّـشُور.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَصْبَـحْـنا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ عافِـني في بَدَنـي ، اللّهُـمَّ عافِـني في سَمْـعي ، اللّهُـمَّ عافِـني في بَصَـري ، لا إلهَ إلاّ أَنْـتَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ إِنّـي أَعـوذُ بِكَ مِنَ الْكُـفر ، وَالفَـقْر ، وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر ، لا إلهَ إلاّ أَنْـتَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي ، اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي ، اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي ، وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَصْبَـحْـنا وَأَصْبَـحْ المُـلكُ للهِ رَبِّ العـالَمـين ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ خَـيْرَ هـذا الـيَوْم ، فَـتْحَهُ ، وَنَصْـرَهُ ، وَنـورَهُ وَبَـرَكَتَـهُ ، وَهُـداهُ ، وَأَعـوذُ بِـكَ مِـنْ شَـرِّ ما فـيهِ وَشَـرِّ ما بَعْـدَه.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه ، أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت ، أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِرْكِهِ ، وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ على نَبِيِّنَا مُحمَّد.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>10</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من صلى على حين يصبح وحين يمسى ادركته شفاعتى يوم القيامة.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لاَ إلَهَ إلاَّ هُوَ، الحَيُّ القَيُّومُ، وَأتُوبُ إلَيهِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>يَا رَبِّ , لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ , وَلِعَظِيمِ سُلْطَانِكَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ ، عَلَيْكَ تَوَكَّلْتُ ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ , مَا شَاءَ اللَّهُ كَانَ ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ ، وَلا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ , أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا , اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي ، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا ، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>ذكر طيب.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>لَا إلَه إلّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءِ قَدِيرِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>100</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>كانت له عدل عشر رقاب، وكتبت له مئة حسنة، ومحيت عنه مئة سيئة، وكانت له حرزا من الشيطان.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>سُبْحـانَ اللهِ وَبِحَمْـدِهِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>100</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>حُطَّتْ خَطَايَاهُ وَإِنْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ. لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ بِأَفْضَلَ مِمَّا جَاءَ بِهِ إِلَّا أَحَدٌ قَالَ مِثْلَ مَا قَالَ أَوْ زَادَ عَلَيْهِ.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أسْتَغْفِرُ اللهَ وَأتُوبُ إلَيْهِ</p>
+                </div>
+                <div class="azkar-count">
+                    <span>100</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>مائة حسنة، ومُحيت عنه مائة سيئة، وكانت له حرزاً من الشيطان حتى يمسى.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="evening">
+            <h2 class="section-title">أذكار المساء</h2>
+            
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ</p>
+                    <p>اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ. [آية الكرسى - البقرة 255].</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح أجير من الجن حتى يمسى ومن قالها حين يمسى أجير من الجن حتى يصبح.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم</p>
+                    <p>قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم</p>
+                    <p>قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم</p>
+                    <p>قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كفته من كل شىء (الإخلاص والمعوذتين).</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَمْسَيْنا وَأَمْسَى الْمُلْكُ للهِ رَبِّ الْعَالَمَيْنِ، اللَّهُمَّ إِنَّي أسْأَلُكَ خَيْرَ هَذَه اللَّيْلَةِ فَتْحَهَا ونَصْرَهَا، ونُوْرَهَا وبَرَكَتهَا، وَهُدَاهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فيهِا وَشَرَّ مَا بَعْدَهَا.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهـمَّ أَنْتَ رَبِّـي لا إلهَ إلاّ أَنْتَ ، خَلَقْتَنـي وَأَنا عَبْـدُك ، وَأَنا عَلـى عَهْـدِكَ وَوَعْـدِكَ ما اسْتَـطَعْـت ، أَعـوذُبِكَ مِنْ شَـرِّ ما صَنَـعْت ، أَبـوءُ لَـكَ بِنِعْـمَتِـكَ عَلَـيَّ وَأَبـوءُ بِذَنْـبي فَاغْفـِرْ لي فَإِنَّـهُ لا يَغْـفِرُ الذُّنـوبَ إِلاّ أَنْتَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها موقنا بها حين يمسى ومات من ليلته دخل الجنة وكذلك حين يصبح.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يصبح وحين يمسى كان حقا على الله أن يرضيه يوم القيامة.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ إِنِّـي أَمْسَيْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>4</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها أعتقه الله من النار.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ ما أَمْسَى بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها حين يمسي أدى شكر ليلته.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>7</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها كفاه الله ما أهمه من أمر الدنيا والأخرة.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>لم يضره من الله شيء.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ بِكَ أَمْسَـينا وَبِكَ أَصْـبَحْنا، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ الْمَصِيرُ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَمْسَيْنَا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ عافِـني في بَدَنـي ، اللّهُـمَّ عافِـني في سَمْـعي ، اللّهُـمَّ عافِـني في بَصَـري ، لا إلهَ إلاّ أَنْـتَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ إِنّـي أَعـوذُ بِكَ مِنَ الْكُـفر ، وَالفَـقْر ، وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر ، لا إلهَ إلاّ أَنْـتَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي ، اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي ، اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي ، وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه ، أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت ، أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِرْكِهِ ، وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ على نَبِيِّنَا مُحمَّد.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>10</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من صلى على حين يصبح وحين يمسى ادركته شفاعتى يوم القيامة.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لاَ إلَهَ إلاَّ هُوَ، الحَيُّ القَيُّومُ، وَأتُوبُ إلَيهِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>يَا رَبِّ , لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ , وَلِعَظِيمِ سُلْطَانِكَ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>لَا إلَه إلّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءِ قَدِيرِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>100</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>كانت له عدل عشر رقاب، وكتبت له مئة حسنة، ومحيت عنه مئة سيئة، وكانت له حرزا من الشيطان.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>سُبْحـانَ اللهِ وَبِحَمْـدِهِ.</p>
+                </div>
+                <div class="azkar-count">
+                    <span>100</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>حُطَّتْ خَطَايَاهُ وَإِنْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ. لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ بِأَفْضَلَ مِمَّا جَاءَ بِهِ إِلَّا أَحَدٌ قَالَ مِثْلَ مَا قَالَ أَوْ زَادَ عَلَيْهِ.</p>
+                </div>
+            </div>
+
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>أسْتَغْفِرُ اللهَ وَأتُوبُ إلَيْهِ</p>
+                </div>
+                <div class="azkar-count">
+                    <span>100</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>مائة حسنة، ومُحيت عنه مائة سيئة، وكانت له حرزاً من الشيطان حتى يصبح.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="daily">
+            <h2 class="section-title">أذكار يومية</h2>
+            
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ</p>
+                </div>
+                <div class="azkar-count">
+                    <span>3</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>من قالها ثلاث مرات حين يصبح وثلاث مرات حين يمسي لم يضره شيء</p>
+                </div>
+            </div>
+            
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>دعاء العافية</p>
+                </div>
+            </div>
+            
+            <div class="azkar-card">
+                <div class="azkar-text">
+                    <p>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ</p>
+                </div>
+                <div class="azkar-count">
+                    <span>1</span>
+                </div>
+                <div class="azkar-virtue">
+                    <p>دعاء الهم والحزن</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2 class="section-title">بيانات التواصل</h2>
+            
+            <div class="contact-section">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">👤</div>
+                        <div class="contact-text">
+                            <span class="contact-label">الاسم:</span> محمود عبد الرحيم
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-text">
+                            <span class="contact-label">رقم التواصل:</span> 01553678445
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🏢</div>
+                        <div class="contact-text">
+                            <span class="contact-label">الشركة:</span> مسار
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#morning">أذكار الصباح</a></li>
+                    <li><a href="#evening">أذكار المساء</a></li>
+                    <li><a href="#daily">أذكار يومية</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <ul>
+                    <li>الاسم: محمود عبد الرحيم</li>
+                    <li>رقم التواصل: 01553678445</li>
+                    <li>الشركة: مسار</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            جميع الحقوق محفوظة &copy; 2025
+        </div>
+    </footer>
+    
+    <script>
+        // Toggle theme
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            
+            // Save preference
+            localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+        });
+        
+        // Check for saved preference
+        if (localStorage.getItem('dark-mode') === 'true') {
+            body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+        
+        // Toggle virtue visibility
+        document.querySelectorAll('.azkar-card').forEach(card => {
+            const virtueEl = card.querySelector('.azkar-virtue');
+            
+            if (virtueEl && virtueEl.textContent.trim()) {
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'button';
+                toggleButton.style.marginTop = '1rem';
+                toggleButton.textContent = 'عرض الفضل';
+                
+                toggleButton.addEventListener('click', () => {
+                    if (virtueEl.style.display === 'none' || virtueEl.style.display === '') {
+                        virtueEl.style.display = 'block';
+                        toggleButton.textContent = 'إخفاء الفضل';
+                    } else {
+                        virtueEl.style.display = 'none';
+                        toggleButton.textContent = 'عرض الفضل';
+                    }
+                });
+                
+                card.appendChild(toggleButton);
+            }
+        });
+    </script>
+</body>
+</html>
